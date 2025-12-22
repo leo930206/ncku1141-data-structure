@@ -1,0 +1,59 @@
+114 - NCKU CSIE Data Structure
+BlueprintFeasibility
+ProblemDescription
+Alex works at a smart factory that assembles products from a customer’s blueprint.
+The assembly process is broken down into many tasks, and some tasks must be completed
+before others—in other words, there are dependencies between tasks.
+Given these dependencies, please help Alex determine whether the entire product can
+be assembled without deadlock.
+InputFormat
+The first line contains two integers ND :
+•N — number of tasks, labeled 0,1, ..., N−1
+•D — number of dependencies between two different tasks
+The next D lines each has two integers u v meaning task umust be done before task v.
+OutputFormat
+One line with a single integer:
+•0if the product can be assembled.
+•1if the product can never be assembled.
+Constraints
+•1≤N≤2×106。
+•0≤D≤2.7×106。
+•0≤u, v≤N−1。
+• No duplicate dependencies (no repeated u v pairs).
+• No self-dependency ( ∀dependency pair u v, u̸=v).
+ExampleTestCase
+1
+---PAGE 1 END---
+114 - NCKU CSIE Data Structure
+SampleInput1
+3 3
+0 1
+1 2
+2 0SampleOutput1
+1
+ExplanationofSample1
+The dependencies 0→1,1→2,and2→0create a directed cycle. Therefore, no
+topological ordering exists and the plan is infeasible.
+Figure 1: Graph of Sample Input 1
+SampleInput2
+3 2
+0 1
+2 1SampleOutput2
+0
+ExplanationofSample2
+The product can be assembled in either order 0→2→1or2→0→1.
+Figure 2: Graph of Sample Input 2
+2
+---PAGE 2 END---
+114 - NCKU CSIE Data Structure
+SampleInput3
+4 3
+0 1
+2 3
+0 3SampleOutput3
+0
+ExplanationofSample3
+The product can be assembled. F or example, in the order 0→1→2→3.
+Figure 3: Graph of Sample Input 3
+3
+---PAGE 3 END---

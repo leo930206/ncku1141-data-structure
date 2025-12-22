@@ -1,0 +1,65 @@
+114 - NCKU CSIE Data Structure
+EscapefromtheUndergroundMaze
+ProblemDescription
+Bonny Ji is an adventurous explorer who loves to discover ancient ruins and mysterious
+places. One day , while hiking deep in a dense forest, he notices an unusual stone structure
+covered in vines and moss. It looks like an entrance to something old and forgotten.
+Driven by curiosity , Bonny Ji steps inside and suddenly realizes that he has entered a
+strange underground maze. As soon as he takes a few steps, the entrance behind him slams
+shut with a loud thud. He tried to push it open, but it would not move. He is now trapped.
+Can you help Bonny Ji solve the maze and find his way back to freedom?
+Here are the movement rules:
+1. Bonny Ji can move up, down, left, or right to an adjacent cell. Each move costs 1
+step .
+2. If Bonny Ji steps onto a magic hole (represented by an uppercase letter), he may
+optionally teleport to other cell with the same letter. T eleporting costs 1 step .
+3. T eleportation is optional; Bonny Ji can choose not to teleport.
+InputFormat
+The first line contains two integers M andN, representing the number of rows and
+columns in the maze. The next M lines each contain exactly N characters without spaces
+describing the maze layout.
+Here are the maze symbols:
+•B: Bonny Ji’s starting position (appears exactly once).
+•E: Exit (appears exactly once).
+• #: W all (impassable).
+•.: Empty cell (walkable).
+•A−Z: Magic holes (except B,E).
+OutputFormat
+If it is impossible to reach the exit, print −1. Otherwise, print the minimum number
+of moves from B toE.
+1
+---PAGE 1 END---
+114 - NCKU CSIE Data Structure
+Constraints
+• The maze contains one B and one E. Each kind of magic hole appears at most 2
+times.
+•1≤M, N≤10000。
+ExampleTestCase
+SampleInput1
+3 4
+.E.#
+#..#
+A.ABSampleOutput1
+4
+ExplanationofSample1
+W e define coordinates as (x, y)= (row, column) with (0,0) at the top-left. B is at
+(2,3), so the shortest path is (2,3)→(2,2)→(1,2)→(0,2)→(0,1).
+SampleInput2
+3 4
+.EA#
+...#
+#.ABSampleOutput2
+3
+ExplanationofSample2
+W e define coordinates as (x, y)= (row, column) with (0,0) at the top-left. B is at
+(2,3), so the shortest path is (2,3)→(2,2)→(0,2)→(0,1).
+SampleInput3
+3 4
+.E.#
+#.##
+A#ABSampleOutput3
+-1
+ExplanationofSample3
+W alls block all possible paths to the exit.
+2
+---PAGE 2 END---

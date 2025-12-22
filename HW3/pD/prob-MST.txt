@@ -1,0 +1,507 @@
+114 - NCKU CSIE Data Structure
+車同軌
+問題敘述
+這是小高與他的好朋友，秦始皇：
+Figure 1: 小高與秦始皇
+眾所周知秦始皇平時喜歡騎北極熊遊歷各地：
+Figure 2: 秦始皇騎北極熊
+為了能夠更高效率的移動，秦始皇想要在各個城市之間建造道路，但礙於大部分的
+資源都拿去修長城了，所以需要更謹慎的規劃資源的消耗。
+這時候，他想起了他的好朋友小高就讀的是國立成功大學資訊工程學系，於是他便
+找上小高，希望小高能夠幫他解決這個問題。
+小高作為秦始皇的好朋友當然是義不容辭，於是便接下了這個任務。
+然而，就在小高將秦國的地理資訊導入系統之時，突然想起了一陣急促的敲門聲。
+.
+.
+.
+1
+---PAGE 1 END---
+114 - NCKU CSIE Data Structure
+還不等小高起身，那扇門便被砸開了，而在門外站著的人，是服學阿姨。
+原來，小高在過去兩年間，喜歡在打掃時間跑回宿舍大叫，導致他的服學（一）及服
+學（二）都被當掉了，即使在重修之後仍沒有通過因而引起了服學阿姨的注意。
+小高本想著，明年重修就好，但沒想到未來的新生不用再修服學了，這也就代表小
+高喪失了重修服學的機會，因此才會被服學阿姨找上門來。
+在這般情況下，小高自然沒有辦法繼續幫秦始皇規劃道路，於是在他臨終走前，他
+找上了你，並希望你能完成他的遺願程式。
+小高告訴你，他已經完成了這支程式的大部分內容，也就是輸入與輸出，你只需要
+完成他剩下來的部分即可。
+簡單來說
+這邊是定義：
+^/ mst.h
+#define MAX_NODES 100000
+#define MAX_EDGES 1200000
+typedef struct Edge {
+struct Node *u;
+struct Node *v;
+int w;
+char keep;
+void *var;
+}Edge;
+typedef struct Node {
+int id;
+int edge_count;
+struct Edge **edges;
+void *var;
+}Node;
+void generate_mst (Node *node);
+2
+---PAGE 2 END---
+114 - NCKU CSIE Data Structure
+你需要實作一個函式如下：
+#include "mst.h"
+void generate_mst (Node *node) {};
+傳入的 Node會是整張圖中的其中一個節點， Node中所附帶的參數說明如下：
+•id :節點的 ID，一個 ID只會對應到一個節點，不會重複
+•edge_count :該節點所擁有的邊的數量
+•edges :一維的陣列，裡面儲存了該節點所擁有的邊
+•var :一個指針，可以任意使用，如果有必要，你可以自行定義結構 (struct )並
+在運行途中進行轉型 (Type Casting )，來儲存任何你想要儲存的數據，會先初始
+化為 NULL
+Edge的參數說明如下：
+•u,v:路徑兩端的 Node
+•w:權重
+•keep :是否要保留該條路徑，會初始化為 0
+•var :同Node中的 var
+總之，你只會得到一個起始節點，然後想辦法用最少的成本將所有節點相連，並且
+將所需要的路徑透過將 keep設為 1進行標記。
+輸入說明
+不斷輸入直至 EOF為止。
+每行有三個正整數 u, v, w，表示在節點 u與節點 v之間有一條權重為 w的無向邊。
+共有 n個節點與 m條邊。
+輸出說明
+共三個正整數，分別代表最小生成樹的節點數、邊數以及權重和。
+3
+---PAGE 3 END---
+114 - NCKU CSIE Data Structure
+測資限制
+•8≤n≤105
+•7≤m≤1.2×106
+•1≤u, v < n
+•1≤w≤m×0.4
+如何繳交
+請將函式獨立於一個檔案中，並且 一定要包含 #include "mst.h" ，繳交至 Judge時，
+只需要上傳該檔案即可。
+例如，這是你的資料夾：
+├─ main.c
+├─ mst.h
+└─ hw.c // 或其他你自己命名的名字
+你需要上傳的只有 hw.c，該檔案的內容大致如下 :
+^/ hw.c
+#include "mst.h" ^/必須要有這行
+#include <stdlib.h> ^/其他你用到的函式庫
+.
+.
+.
+void generate_mst(Node *node) {
+^/在這裡實作你的程式
+}
+檔案中可以包含你其他會用到的東西，如 struct、function 之類的。
+請注意， 不要修改 main.c 及mst.h的內容，這兩個檔案會在評分時 由 Judge系統生
+成，請不要在你的電腦上改完之後又來問： 為什麼在 Judge上會 Compile Error 。
+4
+---PAGE 4 END---
+114 - NCKU CSIE Data Structure
+範例測資
+範例輸入1
+0 1 1
+0 4 4
+0 5 4
+1 3 3
+1 5 4
+1 6 3
+2 3 4
+2 4 5
+2 7 2
+3 6 1
+4 7 2
+5 6 4
+5 7 1
+6 7 1範例輸出1
+8 7 11
+範例說明1
+Figure 3: 範例輸入 1
+5
+---PAGE 5 END---
+114 - NCKU CSIE Data Structure
+Figure 4: 範例輸出 1
+6
+---PAGE 6 END---
+114 - NCKU CSIE Data Structure
+附件
+View On Github Gist
+A.mst.h
+^/ mst.h
+#define MAX_NODES 100000
+#define MAX_EDGES 1200000
+typedef struct Edge {
+struct Node *u;
+struct Node *v;
+int w;
+char keep;
+void *var;
+}Edge;
+typedef struct Node {
+int id;
+int edge_count;
+struct Edge **edges;
+void *var;
+}Node;
+void generate_mst (Node *node);
+B.main.c
+^/ main.c
+#include "mst.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main (){
+int u,v,w,edge_count =0;
+7
+---PAGE 7 END---
+114 - NCKU CSIE Data Structure
+Node *node_u, *node_v;
+int *discovered =(int *)malloc( sizeof (int)*MAX_NODES);
+Node **nodes =(Node **)malloc( sizeof (Node *)*MAX_NODES);
+Edge **edges =(Edge **)malloc( sizeof (Edge *)*MAX_EDGES);
+memset(discovered, 0,sizeof (int)*MAX_NODES);
+memset(nodes, 0,sizeof (Node *)*MAX_NODES);
+memset(edges, 0,sizeof (Edge *)*MAX_EDGES);
+while (scanf( "%d%d%d" ,&u,&v,&w)^=3){
+node_u =nodes[u];
+if(node_u ^=NULL ){
+node_u =(Node *)malloc( sizeof (Node));
+node_u ->id=u;
+node_u ->edge_count =0;
+node_u ->edges =NULL ;
+nodes[u] =node_u;
+node_u ->var =NULL ;
+}
+node_v =nodes[v];
+if(node_v ^=NULL ){
+node_v =(Node *)malloc( sizeof (Node));
+node_v ->id=v;
+node_v ->edge_count =0;
+node_v ->edges =NULL ;
+nodes[v] =node_v;
+node_v ->var =NULL ;
+}
+node_u ->edge_count ^+;
+node_v ->edge_count ^+;
+Edge *new_edge =(Edge *)malloc( sizeof (Edge));
+new_edge ->u=node_u;
+new_edge ->v=node_v;
+8
+---PAGE 8 END---
+114 - NCKU CSIE Data Structure
+new_edge ->w=w;
+new_edge ->keep =0;
+new_edge ->var =NULL ;
+edges[edge_count ^+]=new_edge;
+}
+for (int i=0;i<edge_count; i^+){
+Edge *edge =edges[i];
+node_u =edge ->u;
+node_v =edge ->v;
+if(node_u ->edges ^=NULL ){
+node_u ->edges =
+(Edge **)malloc( sizeof (Edge *)*node_u ->edge_count);
+node_u ->edge_count =0;
+}
+node_u ->edges[node_u ->edge_count ^+]=edge;
+if(node_v ->edges ^=NULL ){
+node_v ->edges =
+(Edge **)malloc( sizeof (Edge *)*node_v ->edge_count);
+node_v ->edge_count =0;
+}
+node_v ->edges[node_v ->edge_count ^+]=edge;
+}
+generate_mst(nodes[ 0]);
+int node_count =0;
+int keep_edge_count =0;
+unsigned long long total_weight =0;
+for (int i=0;i<edge_count; i^+){
+Edge *edge =edges[i];
+if(edge ->keep) {
+total_weight +=edge ->w;
+keep_edge_count ^+;
+9
+---PAGE 9 END---
+114 - NCKU CSIE Data Structure
+u=edge ->u->id;
+v=edge ->v->id;
+if(!discovered[u]) {
+discovered[u] =1;
+node_count ^+;
+}
+if(!discovered[v]) {
+discovered[v] =1;
+node_count ^+;
+}
+}
+}
+printf( "%d %d %llu \n",node_count, keep_edge_count, total_weight);
+}
+10
+---PAGE 10 END---
+114 - NCKU CSIE Data Structure
+UnifiedVehicleTracks
+ProblemDescription
+This is Xiao Gao and his good friend, Qin Shi Huang:
+Figure 5: Xiao Gao and Qin Shi Huang
+As is well known, Qin Shi Huang usually likes to ride polar bears to travel around:
+Figure 6: Qin Shi Huang Riding a Polar Bear
+In order to be able to move more eﬀiciently , Qin Shi Huang wants to build roads between
+various cities, but because most resources are used to build the Great W all, it is necessary
+to plan resource consumption more carefully .
+At this time, he remembered that his good friend Xiao Gao is studying in the Depart-
+ment of Computer Science and Information Engineering at National Cheng Kung University ,
+so he approached Xiao Gao, hoping that Xiao Gao could help him solve this problem.
+As Qin Shi Huang’s good friend, Xiao Gao naturally took on the task without hesitation.
+However, just as Xiao Gao was importing the geographical information of the Qin state
+into the system, he suddenly heard a rapid knocking sound.
+.
+11
+---PAGE 11 END---
+114 - NCKU CSIE Data Structure
+.
+.
+Before Xiao Gao could get up, the door was smashed open, and the person standing
+outside was the Service Study Auntie.
+It turned out that over the past two years, Xiao Gao liked to run back to his dormitory
+and shout during cleaning time, causing him to fail both Service Study (I) and Service Study
+(II). Even after retaking the courses, he still did not pass, which attracted the attention of
+the Service Study Auntie.
+Xiao Gao originally thought that he could retake the course next year, but he did not
+expect that future freshmen would no longer need to take Service Study . This meant that
+Xiao Gao lost the opportunity to retake Service Study , which is why the Service Study
+Auntie came to his door.
+In this situation, Xiao Gao naturally could not continue to help Qin Shi Huang plan
+the roads. So before he left, he found you and hoped that you could fulfill his last wish
+program.
+Xiao Gao told you that he has already completed most of the content of this program,
+which is the input and output. Y ou only need to complete the remaining part.
+Insimpleterms
+Here are the definitions:
+^/ mst.h
+#define MAX_NODES 100000
+#define MAX_EDGES 1200000
+typedef struct Edge {
+struct Node *u;
+struct Node *v;
+int w;
+char keep;
+void *var;
+}Edge;
+12
+---PAGE 12 END---
+114 - NCKU CSIE Data Structure
+typedef struct Node {
+int id;
+int edge_count;
+struct Edge **edges;
+void *var;
+}Node;
+void generate_mst (Node *node);
+Y ou need to implement a function as follows:
+#include "mst.h"
+void generate_mst (Node *node) {};
+The passed Node will be one of the nodes in the entire graph. The parameters attached to
+theNode are explained as follows:
+•id : The ID of the node. Each ID corresponds to only one node and will not be
+duplicated.
+•edge_count : The number of edges this node has.
+•edges : A one-dimensional array storing the edges this node has.
+•var : A pointer that can be used arbitrarily . If necessary , you can define your own
+structure and perform type casting during runtime to store any data you want. It will
+be initialized to NULL .
+The parameters of Edge are explained as follows:
+•u,v: The Node s at both ends of the path.
+•w: The weight.
+•keep : Whether to keep this path. It will be initialized to 0.
+•var : Same as var inNode .
+In short, you will only be given a starting node. Then, you need to connect all nodes
+with the minimum cost and mark the required paths by setting keep to 1.
+13
+---PAGE 13 END---
+114 - NCKU CSIE Data Structure
+InputFormat
+Keep reading input until EOF.
+Each line has three positive integers u, v, w , indicating an undirected edge with weight
+w between node uand node v.
+There are nnodes and m edges.
+OutputFormat
+Three positive integers, representing the number of nodes, the number of edges, and
+the total weight of the minimum spanning tree, respectively .
+Constraints
+•8≤n≤105
+•7≤m≤1.2×106
+•1≤u, v < n
+•1≤w≤m×0.4
+14
+---PAGE 14 END---
+114 - NCKU CSIE Data Structure
+HowtoSubmit
+Please put the function in a separate file and must include #include "mst.h" . When
+submitting to Judge, only upload this file.
+F or example, this is your folder:
+├─ main.c
+├─ mst.h
+└─ hw.c // or any other name you choose
+Y ou only need to upload hw.c . The content of this file should roughly be:
+^/ hw.c
+#include "mst.h" ^/ This line must be included
+#include <stdlib.h> ^/ Other libraries you use
+.
+.
+.
+void generate_mst(Node *node) {
+^/ Implement your program here
+}
+The file can include other things you need, such as structs, functions, etc.
+Please note, do not modify the content of main.c andmst.h . These two files will be
+generated by the Judge system during grading. Do not modify them on your computer
+and then ask: Why does it show Compile Error on Judge? .
+15
+---PAGE 15 END---
+114 - NCKU CSIE Data Structure
+ExampleTestCase
+SampleInput1
+0 1 1
+0 4 4
+0 5 4
+1 3 3
+1 5 4
+1 6 3
+2 3 4
+2 4 5
+2 7 2
+3 6 1
+4 7 2
+5 6 4
+5 7 1
+6 7 1SampleOutput1
+8 7 11
+ExplanationofSample1
+Figure 7: Sample Input 1
+16
+---PAGE 16 END---
+114 - NCKU CSIE Data Structure
+Figure 8: Sample Output 1
+17
+---PAGE 17 END---
+114 - NCKU CSIE Data Structure
+Appendix
+View On Github Gist
+A.mst.h
+^/ mst.h
+#define MAX_NODES 100000
+#define MAX_EDGES 1200000
+typedef struct Edge {
+struct Node *u;
+struct Node *v;
+int w;
+char keep;
+void *var;
+}Edge;
+typedef struct Node {
+int id;
+int edge_count;
+struct Edge **edges;
+void *var;
+}Node;
+void generate_mst (Node *node);
+B.main.c
+^/ main.c
+#include "mst.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main (){
+int u,v,w,edge_count =0;
+18
+---PAGE 18 END---
+114 - NCKU CSIE Data Structure
+Node *node_u, *node_v;
+int *discovered =(int *)malloc( sizeof (int)*MAX_NODES);
+Node **nodes =(Node **)malloc( sizeof (Node *)*MAX_NODES);
+Edge **edges =(Edge **)malloc( sizeof (Edge *)*MAX_EDGES);
+memset(discovered, 0,sizeof (int)*MAX_NODES);
+memset(nodes, 0,sizeof (Node *)*MAX_NODES);
+memset(edges, 0,sizeof (Edge *)*MAX_EDGES);
+while (scanf( "%d%d%d" ,&u,&v,&w)^=3){
+node_u =nodes[u];
+if(node_u ^=NULL ){
+node_u =(Node *)malloc( sizeof (Node));
+node_u ->id=u;
+node_u ->edge_count =0;
+node_u ->edges =NULL ;
+nodes[u] =node_u;
+node_u ->var =NULL ;
+}
+node_v =nodes[v];
+if(node_v ^=NULL ){
+node_v =(Node *)malloc( sizeof (Node));
+node_v ->id=v;
+node_v ->edge_count =0;
+node_v ->edges =NULL ;
+nodes[v] =node_v;
+node_v ->var =NULL ;
+}
+node_u ->edge_count ^+;
+node_v ->edge_count ^+;
+Edge *new_edge =(Edge *)malloc( sizeof (Edge));
+new_edge ->u=node_u;
+new_edge ->v=node_v;
+19
+---PAGE 19 END---
+114 - NCKU CSIE Data Structure
+new_edge ->w=w;
+new_edge ->keep =0;
+new_edge ->var =NULL ;
+edges[edge_count ^+]=new_edge;
+}
+for (int i=0;i<edge_count; i^+){
+Edge *edge =edges[i];
+node_u =edge ->u;
+node_v =edge ->v;
+if(node_u ->edges ^=NULL ){
+node_u ->edges =
+(Edge **)malloc( sizeof (Edge *)*node_u ->edge_count);
+node_u ->edge_count =0;
+}
+node_u ->edges[node_u ->edge_count ^+]=edge;
+if(node_v ->edges ^=NULL ){
+node_v ->edges =
+(Edge **)malloc( sizeof (Edge *)*node_v ->edge_count);
+node_v ->edge_count =0;
+}
+node_v ->edges[node_v ->edge_count ^+]=edge;
+}
+generate_mst(nodes[ 0]);
+int node_count =0;
+int keep_edge_count =0;
+unsigned long long total_weight =0;
+for (int i=0;i<edge_count; i^+){
+Edge *edge =edges[i];
+if(edge ->keep) {
+total_weight +=edge ->w;
+keep_edge_count ^+;
+20
+---PAGE 20 END---
+114 - NCKU CSIE Data Structure
+u=edge ->u->id;
+v=edge ->v->id;
+if(!discovered[u]) {
+discovered[u] =1;
+node_count ^+;
+}
+if(!discovered[v]) {
+discovered[v] =1;
+node_count ^+;
+}
+}
+}
+printf( "%d %d %llu \n",node_count, keep_edge_count, total_weight);
+}
+21
+---PAGE 21 END---
